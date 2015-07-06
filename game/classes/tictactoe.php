@@ -75,7 +75,7 @@ class TicTacToe {
         if(!$this->checkStone($stone))
             return 0;
         $user = $this->getCurrentGamer();
-        $this->getCurrentGamer()->stones[] = array((int)$x, (int)$y);
+        $user->stones[] = array((int)$x, (int)$y);
         $this->grid->drawGrid($this->users);
         if($user->isline($stone, $this->line)){
             print "\n".$user->name." WIN!\n";

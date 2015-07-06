@@ -1,0 +1,56 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ksukhov
+ * Date: 03.07.15
+ * Time: 13:14
+ */
+
+class Grid {
+    public $gridWidth;
+    public $gridHeight;
+    private $markers = array('X','0','*');
+
+    /**
+     * @param $width
+     * @param $height
+     */
+    function __construct($width, $height){
+        $this->gridWidth = $width;
+        $this->gridHeight = $height;
+    }
+    function drawGrid(array $users){
+        system('clear');
+        print " ";
+
+        for($j=0;$j < $this->gridWidth; $j++) {
+            print "|";
+            print $j + 1;
+        }
+        print "|\n";
+        for($i=0;$i < $this->gridHeight; $i++){
+            print $i + 1;
+            for($j=0;$j < $this->gridWidth; $j++) {
+                print "|".$this->checkSite($j,$i, $users);
+            }
+            print "|\n";
+        }
+    }
+
+    /**
+     * @param $x
+     * @param $y
+     * @param $stones
+     * @return string
+     */
+    function checkSite($x,$y, $users) //TODO переделать
+    {
+        for($i = 0; $i < count($users); $i++) {
+		//  var_dump($users[$i]->stones);
+            if (in_array(array($x + 1, $y + 1), $users[$i]->stones)) {
+                return $this->markers[$i];	
+            }
+        }
+        return ' ';
+    }
+}
